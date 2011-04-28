@@ -1,0 +1,21 @@
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastrs\blastrs\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\svn\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\iFest\Blastr\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\iFest\Blastr_Revision2\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\iFest\Blastr_Revision4\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\temp\blastrs\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\iFest\Blastr_Revision5\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\temps\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\iFest\Blastr_Revision7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\temp4\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\temp5\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Blastr_Revision7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jayden Tilbrook\Desktop\Blastr_Revision7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\temp6\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Blastr_Revision9\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Harini Suresh.Home-PC\Documents\Nikhil\Games\blastr\finalrepo\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jayden Tilbrook\Desktop\Blastr_Revision9\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Jayden Tilbrook\Documents\Jayden Personal\Blastr_Revision9\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Nikhil\Documents\blastrs\blastr\blastrs\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Nikhil\Documents\dock11\Project\blastrsEngine\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Nikhil\Documents\Software Project\blastrsEngine\Content\obj\x86\Debug\ResolveAssemblyReference.cache
