@@ -63,8 +63,8 @@ namespace blastrs
             Stadium = new Stadium(this);
             Input = new Input(this);         
 
-            Stadium.LevelNumber = 4;
-            Stadium.Initialize(graphics);
+            Stadium.LevelNumber = 5;
+            Stadium.Initialize(graphics, this);
 
             NumberOfPlayers = 2;
             Player = new Player[NumberOfPlayers];
@@ -95,7 +95,7 @@ namespace blastrs
             Stadium.CameraPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2); //STILL CAMERA FOR NOW         
             if (Stadium.LevelNumber > 1)
             {
-                Stadium.Initialize(graphics);
+                Stadium.Initialize(graphics, this);
             }
 
             for (int r = 0; r < NumberOfPlayers; r++)
@@ -149,6 +149,14 @@ namespace blastrs
                     Stadium.InitiatePanel(4, 920, 410, false, this);
                     Stadium.InitiatePanel(5, 1000, 480, false, this);
                     break;
+                case 5:
+                    Stadium.InitiatePanel(0, 610, 100, false, this);
+                    Stadium.InitiatePanel(1, 690, 100, false, this);
+                    Stadium.InitiatePanel(2, 770, 100, false, this);
+                    Stadium.InitiatePanel(3, 850, 100, false, this);
+                    Stadium.InitiatePanel(4, 1044, 310, false, this);
+                    Stadium.InitiatePanel(5, 1000, 310, false, this);
+                    break;
             }
         }
         public void DistributeBoxes()
@@ -164,6 +172,10 @@ namespace blastrs
                 case 3:
                     break;
                 case 4:
+                    break;
+                case 5:
+                    Stadium.InitiateBox(0, 434, 266, false, Color.Orange, this);
+                    Stadium.InitiateBox(1, 1077, 246, false, Color.Blue, this);
                     break;
             }
         }
@@ -185,6 +197,8 @@ namespace blastrs
                     Bots[0].isDead = false;
                     Bots[0].StartPosition = new Vector2(380, 410);
                     Bots[0].Position = Bots[0].StartPosition;
+                    break;
+                case 5:
                     break;
             }
         }
@@ -260,7 +274,6 @@ namespace blastrs
                                 }
                             }
                     }
-
                 }
                 
                 switch (Stadium.LevelNumber)
@@ -276,6 +289,9 @@ namespace blastrs
                         break;
                     case 4:
                         Stadium.Level4(NumberOfPlayers, Panels, Player, Bots);
+                        break;
+                    case 5:
+                        Stadium.Level5(this, NumberOfPlayers, Panels, Player, Boxes);
                         break;
                 }
 

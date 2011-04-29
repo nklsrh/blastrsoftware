@@ -37,16 +37,16 @@ namespace blastrs
         public int NumberOfBots;
         public int NumberOfPlayersFinished;
 
-        public void Initialize(GraphicsDeviceManager graphics)
+        public void Initialize(GraphicsDeviceManager graphics, Game1 game)
         {
             //CollisionMap = new Texture2D(graphics.GraphicsDevice, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             StartPosition = new Vector2[2];
-            UpdateStartPosition();
+            UpdateStartPosition(game);
 
             base.Initialize();
         }
 
-        private void UpdateStartPosition()
+        private void UpdateStartPosition(Game1 game)
         {
             switch (LevelNumber)
             {
@@ -56,6 +56,7 @@ namespace blastrs
                     NumberOfPanels = 6;
                     NumberOfBoxes = 0;
                     NumberOfBots = 0;
+                    game.NumberOfPlayers = 2;
                     break;
                 case 2:
                     StartPosition[0] = new Vector2(183, 144);
@@ -70,6 +71,7 @@ namespace blastrs
                     NumberOfPanels = 6;
                     NumberOfBoxes = 0;
                     NumberOfBots = 0;
+                    game.NumberOfPlayers = 2;
                     break;
                 case 4:
                     StartPosition[0] = new Vector2(530, 240);
@@ -77,6 +79,15 @@ namespace blastrs
                     NumberOfPanels = 6;
                     NumberOfBoxes = 0;
                     NumberOfBots = 1;
+                    game.NumberOfPlayers = 2;
+                    break;
+                case 5:
+                    StartPosition[0] = new Vector2(519, 244);
+                    StartPosition[1] = new Vector2(-100, -100);
+                    NumberOfPanels = 6;
+                    NumberOfBoxes = 2;
+                    NumberOfBots = 0;
+                    game.NumberOfPlayers = 1;
                     break;
             }
         }
@@ -228,6 +239,42 @@ namespace blastrs
                 }
             }
         }
+        public void Level5(Game1 game, int NumberOfPlayers, Panel[] Panels, Player[] Player, Box[] Boxes)
+        {
+            game.NumberOfPlayers = 1;
+            for (int s = 0; s < NumberOfPlayers; s++)
+            {
+                for (int r = 0; r < NumberOfPanels; r++)
+                {
+                    if (Panels[r].Rectangle.Contains((int)Player[s].Position.X, (int)Player[s].Position.Y) && Panels[r].isVisible)
+                    {
+                        Panels[r].isSteppedOn = true;
+                        Player[s].onPlatform[r] = true;
+                    }
+                    else
+                    {
+                        Panels[r].isSteppedOn = false;
+                        Player[s].onPlatform[r] = false;
+                    }
+                }
+            }
+            CheckBoxActivation(Boxes, game);
+            if (Boxes[0].isActivated)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    Panels[x].isVisible = true;
+                }
+            }
+            if (Boxes[1].isActivated)
+            {
+                for (int x = 4; x < 6; x++)
+                {
+                    Panels[x].isVisible = true;
+                }
+            }
+        }
+
         public void CheckBoxActivation(Box[] Boxes, Game1 game)
         {
             for (int g = 0; g < NumberOfBoxes; g++)

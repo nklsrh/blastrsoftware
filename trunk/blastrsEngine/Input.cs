@@ -21,6 +21,7 @@ namespace blastrs
         {
         }
         GamePadState[] previousGamePadState, currentGamePadState;
+        KeyboardState previousKey, currentKey;
 
         public void Initialize(Game1 game, Player[] player)
         {
@@ -32,17 +33,20 @@ namespace blastrs
                 previousGamePadState[i] = GamePad.GetState((PlayerIndex)(i));
                 currentGamePadState[i] = GamePad.GetState((PlayerIndex)(i));
             }
+            previousKey = Keyboard.GetState(PlayerIndex.One);
 
             base.Initialize();
         }
 
         public void Update(GameTime gameTime, Blast[] blast, SpriteBatch spriteBatch, Menu menu, Game1 game, ContentManager content, Player[] player)
         {
+            currentKey = Keyboard.GetState(PlayerIndex.One);
+
             #region Menus
             for (int i = 0; i < player.Length; i++)
             {
                 currentGamePadState[i] = GamePad.GetState((PlayerIndex)(i));
-                if (currentGamePadState[i].Buttons.A == ButtonState.Pressed && previousGamePadState[i].Buttons.A == ButtonState.Released)
+                if (currentGamePadState[i].Buttons.A == ButtonState.Pressed && previousGamePadState[i].Buttons.A == ButtonState.Released || currentKey.IsKeyUp(Keys.A) && previousKey.IsKeyDown(Keys.A))
                 {
                     if (menu.CurrentScreen == blastrs.Menu.Card.Scoreboard || menu.CurrentScreen == blastrs.Menu.Card.PlayerInformation)
                     {
@@ -75,7 +79,7 @@ namespace blastrs
                     }
                 }
 
-                if (currentGamePadState[i].Buttons.B == ButtonState.Pressed && previousGamePadState[i].Buttons.B == ButtonState.Released)
+                if (currentGamePadState[i].Buttons.B == ButtonState.Pressed && previousGamePadState[i].Buttons.B == ButtonState.Released || currentKey.IsKeyUp(Keys.B) && previousKey.IsKeyDown(Keys.B))
                 {
                     if (menu.CurrentScreen == blastrs.Menu.Card.MainMenu)
                     {
@@ -171,6 +175,7 @@ namespace blastrs
             {
                 previousGamePadState[i] = currentGamePadState[i];
             }
+            previousKey = currentKey;
 
 #region KeyboardInput
             //------------------------------------------------------KEGBOARD
