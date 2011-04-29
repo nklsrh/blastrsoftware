@@ -26,15 +26,15 @@ namespace blastrs
         public Circle Area;
         public Texture2D Sprite;
         public bool Ready;
-        public TimeSpan blastTime = new TimeSpan(0,0,3);
+        public TimeSpan blastTime = new TimeSpan(0,0,0,0,800);
 
         public override void Initialize()
         {
             Area = new Circle();
             Ready = true;
 
-            Power = 10;
-            Radius = 150;
+            Power = 5;
+            Radius = 50;
 
             base.Initialize();
         }
@@ -53,7 +53,7 @@ namespace blastrs
                 {
                     Ready = true;
                     Player.Blasting = false;
-                    blastTime = new TimeSpan(0, 0, 3);
+                    blastTime = new TimeSpan(0, 0, 0, 0, 800);
                 }
             }
 

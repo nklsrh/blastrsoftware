@@ -19,3 +19,4 @@ C:\Users\Jayden Tilbrook\Documents\Jayden Personal\Blastr_Revision9\Content\obj\
 C:\Users\Nikhil\Documents\blastrs\blastr\blastrs\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Nikhil\Documents\dock11\Project\blastrsEngine\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Nikhil\Documents\Software Project\blastrsEngine\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Software\Software Project\blastrsEngine\Content\obj\x86\Debug\ResolveAssemblyReference.cache
