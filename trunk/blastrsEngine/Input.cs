@@ -132,7 +132,14 @@ namespace blastrs
                     {
                         game.Menu.CurrentScreen = Menu.Card.Paused;
                     }
-
+                    if (currentGamePadState[i].IsButtonDown(Buttons.A))
+                    {
+                        player[i].SpeedPower = 1f;
+                    }
+                    else
+                    {
+                        player[i].SpeedPower = 0.3f;
+                    }
                     if (currentGamePadState[i].Triggers.Right < 0.3)
                     {
                         if (!player[i].Blasting && currentGamePadState[i].ThumbSticks.Right != Vector2.Zero && blast[i].Ready == false)
@@ -203,7 +210,7 @@ namespace blastrs
 
                     try
                     {
-                        blast[0].Direction = player[0].Speed * 8.4f;
+                        blast[0].Direction = player[0].Speed * blast[0].Power;
                     }
                     catch { }
 
@@ -214,6 +221,7 @@ namespace blastrs
             }
             else
             {
+                blast[0].Position = new Vector2(-1000, -1000);
                 if (blast[0].Ready)
                 {
                     player[0].Blasting = false;
@@ -246,7 +254,7 @@ namespace blastrs
 
                     try
                     {
-                        blast[1].Direction = player[1].Speed * 8.4f;
+                        blast[1].Direction = player[1].Speed * blast[0].Power;
                     }
                     catch { }
 

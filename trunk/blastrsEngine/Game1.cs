@@ -63,7 +63,7 @@ namespace blastrs
             Stadium = new Stadium(this);
             Input = new Input(this);         
 
-            Stadium.LevelNumber = 5;
+            Stadium.LevelNumber = 6;
             Stadium.Initialize(graphics, this);
 
             NumberOfPlayers = 2;
@@ -90,19 +90,27 @@ namespace blastrs
                 Blast[r].Initialize();
             }
 
-            Stadium.Sprite = Content.Load<Texture2D>("Levels\\Level" + Stadium.LevelNumber);
+            try
+            {
+                Stadium.Sprite = Content.Load<Texture2D>("Levels\\Level" + Stadium.LevelNumber);
+            }
+            catch
+            {
+                Stadium.LevelNumber = 1;
+                NewGame();
+            }
             Stadium.CollisionMap = Stadium.Sprite;
             Stadium.CameraPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2); //STILL CAMERA FOR NOW         
-            if (Stadium.LevelNumber > 1)
-            {
-                Stadium.Initialize(graphics, this);
-            }
+            Stadium.Initialize(graphics, this);
+            
 
             for (int r = 0; r < NumberOfPlayers; r++)
             {
                 Player[r].StartPosition = Stadium.StartPosition[r];
                 Player[r].Initialize();
             }
+
+            Boxes = new Box[Stadium.NumberOfBoxes];
 
             Input.Initialize(this, Player);
 
@@ -150,12 +158,23 @@ namespace blastrs
                     Stadium.InitiatePanel(5, 1000, 480, false, this);
                     break;
                 case 5:
-                    Stadium.InitiatePanel(0, 610, 100, false, this);
-                    Stadium.InitiatePanel(1, 690, 100, false, this);
-                    Stadium.InitiatePanel(2, 770, 100, false, this);
-                    Stadium.InitiatePanel(3, 850, 100, false, this);
-                    Stadium.InitiatePanel(4, 1044, 310, false, this);
-                    Stadium.InitiatePanel(5, 1000, 310, false, this);
+                    Stadium.InitiatePanel(0, 610, 140, false, this);
+                    Stadium.InitiatePanel(1, 690, 140, false, this);
+                    Stadium.InitiatePanel(2, 770, 140, false, this);
+                    Stadium.InitiatePanel(3, 850, 140, false, this);
+                    Stadium.InitiatePanel(4, 1044, 313, false, this);
+                    Stadium.InitiatePanel(5, 1044, 393, false, this);
+                    break;
+                case 6:
+                    Stadium.InitiatePanel(0, 580, 122, false, this);
+                    Stadium.InitiatePanel(1, 660, 122, false, this);
+                    Stadium.InitiatePanel(2, 740, 122, false, this);
+                    Stadium.InitiatePanel(3, 820, 122, false, this);
+                    Stadium.InitiatePanel(4, 1000, 272, false, this);
+                    Stadium.InitiatePanel(5, 1000, 352, false, this);
+                    Stadium.InitiatePanel(6, 619, 502, false, this);
+                    Stadium.InitiatePanel(7, 699, 502, false, this);
+                    Stadium.InitiatePanel(8, 779, 502, false, this);
                     break;
             }
         }
@@ -176,6 +195,12 @@ namespace blastrs
                 case 5:
                     Stadium.InitiateBox(0, 434, 266, false, Color.Orange, this);
                     Stadium.InitiateBox(1, 1077, 246, false, Color.Blue, this);
+                    break;
+                case 6:
+                    Stadium.InitiateBox(0, 322, 230, false, Color.Blue, this);
+                    Stadium.InitiateBox(1, 947, 184, false, Color.Orange, this);
+                    Stadium.InitiateBox(2, 993, 540, false, Color.Blue, this);
+                    Stadium.InitiateBox(3, 915, 481, false, Color.Orange, this);
                     break;
             }
         }
@@ -292,6 +317,9 @@ namespace blastrs
                         break;
                     case 5:
                         Stadium.Level5(this, NumberOfPlayers, Panels, Player, Boxes);
+                        break;
+                    case 6:
+                        Stadium.Level6(this, NumberOfPlayers, Panels, Player, Boxes);
                         break;
                 }
 
