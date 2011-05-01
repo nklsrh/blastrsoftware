@@ -36,6 +36,7 @@ namespace blastrs
         public int NumberOfBoxes;
         public int NumberOfBots;
         public int NumberOfPlayersFinished;
+        private Box[] Boxs = new Box[10];
 
         public void Initialize(GraphicsDeviceManager graphics, Game1 game)
         {
@@ -83,9 +84,15 @@ namespace blastrs
                     break;
                 case 5:
                     StartPosition[0] = new Vector2(519, 244);
-                    StartPosition[1] = new Vector2(-100, -100);
                     NumberOfPanels = 6;
                     NumberOfBoxes = 2;
+                    NumberOfBots = 0;
+                    game.NumberOfPlayers = 1;
+                    break;
+                case 6:
+                    StartPosition[0] = new Vector2(465, 222);
+                    NumberOfPanels = 9;
+                    NumberOfBoxes = 4;
                     NumberOfBots = 0;
                     game.NumberOfPlayers = 1;
                     break;
@@ -107,6 +114,12 @@ namespace blastrs
             game.Boxes[BoxIndex].isActivated = isActivated;
             game.Boxes[BoxIndex].Colour = color;
             game.Boxes[BoxIndex].Initialize(game);
+            game.Boxes[BoxIndex].onSomePlatform = false;
+            game.Boxes[BoxIndex].onPlatform = new bool[NumberOfPanels];
+            for (int x = 0; x < NumberOfPanels; x++)
+            {
+                game.Boxes[BoxIndex].onPlatform[x] = false;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -274,7 +287,59 @@ namespace blastrs
                 }
             }
         }
+        public void Level6(Game1 game, int NumberOfPlayers, Panel[] Panels, Player[] Player, Box[] Boxes)
+        {
+            game.NumberOfPlayers = 1;
+            
 
+            for (int s = 0; s < NumberOfPlayers; s++)
+            {
+                for (int r = 0; r < NumberOfPanels; r++)
+                {
+                    if (Panels[r].Rectangle.Contains((int)Player[s].Position.X, (int)Player[s].Position.Y) && Panels[r].isVisible)
+                    {
+                        Panels[r].isSteppedOn = true;
+                        Player[s].onPlatform[r] = true;
+                    }
+                    else
+                    {
+                        Panels[r].isSteppedOn = false;
+                        Player[s].onPlatform[r] = false;
+                    }
+                }
+            }
+            for (int s = 0; s < NumberOfBoxes; s++)
+            {
+                for (int r = 0; r < NumberOfPanels; r++)
+                {
+                    if (Panels[r].Rectangle.Contains((int)Boxes[s].Position.X, (int)Boxes[s].Position.Y) && Panels[r].isVisible)
+                    {
+                        Panels[r].isSteppedOn = true;
+                        Boxes[s].onPlatform[r] = true;
+                    }
+                    else
+                    {
+                        Panels[r].isSteppedOn = false;
+                        Boxes[s].onPlatform[r] = false;
+                    }
+                }
+            }
+            CheckBoxActivation(Boxes, game);
+            if (Boxes[0].isActivated)
+            {
+                for (int x = 0; x < 4; x++)
+                {
+                    Panels[x].isVisible = true;
+                }
+            }
+            if (Boxes[1].isActivated)
+            {
+                for (int x = 4; x < 6; x++)
+                {
+                    Panels[x].isVisible = true;
+                }
+            }
+        }
         public void CheckBoxActivation(Box[] Boxes, Game1 game)
         {
             for (int g = 0; g < NumberOfBoxes; g++)
@@ -283,15 +348,24 @@ namespace blastrs
                 CollisionMap.GetData<Color>(0, new Rectangle((int)Boxes[g].Position.X, (int)Boxes[g].Position.Y, 1, 1), bgColorArr, 0, 1);
                 bgColor = bgColorArr[0];
 
+                Boxes[g].onSomePlatform = false;
+                for (int r = 0; r < NumberOfPanels; r++)
+                {
+                    if (Boxes[g].onPlatform[r])
+                    {
+                        Boxes[g].onSomePlatform = true;
+                    }
+                }
                 if (bgColor == Boxes[g].Colour)
                 {
                     Boxes[g].isActivated = true;
                 }
-                if (bgColor == new Color(88, 88, 88))
+                if (bgColor == new Color(88, 88, 88) && !Boxes[g].onSomePlatform)
                 {
                     game.NewGame();
                 }
-            }
+            }         
+            
         }
 
         public void CheckCollisionWithPlayer(Player Player, GameTime gameTime, int index, Game1 game1)
@@ -313,10 +387,27 @@ namespace blastrs
                 Player.Speed = Vector2.Zero;
             }
 
-            if (bgColor == new Color(118, 236, 0)) //FALLS OFFFFFFFFFFF
+            int x = 1;
+            try
+            {                
+                for (int s = 0; s < Boxs.Rank; s++)
+                {
+                    if (Boxs[s].isActivated)
+                    {
+                        x++;
+                    }
+                    else
+                    {
+                        x = -10000;
+                    }
+                }
+            }
+            catch { x = 0; }
+
+            if (bgColor == new Color(118, 236, 0)) //WIN LEVEL
             {
                 Player.isFinished = true;
-                if (game1.Player[1 - index].isFinished && Player.isFinished)
+                if (game1.Player[game1.NumberOfPlayers - 1 - index].isFinished && Player.isFinished && x >= Boxs.Rank)
                 {
                     LevelNumber += 1;
                     game1.NewGame();

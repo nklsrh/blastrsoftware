@@ -25,6 +25,8 @@ namespace blastrs
         public Color Colour;
         public bool isActivated;
         public Texture2D Sprite;
+        public bool onSomePlatform;
+        public bool[] onPlatform;
 
         public void Initialize(Game1 game)
         {

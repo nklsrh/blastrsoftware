@@ -26,14 +26,14 @@ namespace blastrs
         public Circle Area;
         public Texture2D Sprite;
         public bool Ready;
-        public TimeSpan blastTime = new TimeSpan(0,0,0,0,800);
+        public TimeSpan blastTime = new TimeSpan(0,0,0,0,500);
 
         public override void Initialize()
         {
             Area = new Circle();
             Ready = true;
 
-            Power = 5;
+            Power = 12;
             Radius = 50;
 
             base.Initialize();
@@ -53,7 +53,7 @@ namespace blastrs
                 {
                     Ready = true;
                     Player.Blasting = false;
-                    blastTime = new TimeSpan(0, 0, 0, 0, 800);
+                    blastTime = new TimeSpan(0, 0, 0, 0, 500);
                 }
             }
 
@@ -76,7 +76,7 @@ namespace blastrs
         {
             if (Area.Intersects(new Rectangle((int)Box.Position.X, (int)Box.Position.Y, 1, 1)))
             {
-                Box.Position += Direction * 0.2f;
+                Box.Position += Direction * 0.5f;
             }
             else
             {
@@ -98,9 +98,9 @@ namespace blastrs
             if (!Ready)
             {
                 if (Direction.Y <= 0)
-                { sb.Draw(Sprite, Position, null, Color.White, (float)(Math.Atan(-Direction.X / Direction.Y)), new Vector2(Sprite.Width / 2, Sprite.Height / 2), (float)(Power / (12)), SpriteEffects.None, 0f); }
+                { sb.Draw(Sprite, Position, null, Color.White, (float)(Math.Atan(-Direction.X / Direction.Y)), new Vector2(Sprite.Width / 2, Sprite.Height / 2), (float)(Radius / (50)), SpriteEffects.None, 0f); }
                 if (Direction.Y > 0)
-                { sb.Draw(Sprite, Position, null, Color.White, (float)(Math.PI + Math.Atan(-Direction.X / Direction.Y)), new Vector2(Sprite.Width / 2, Sprite.Height / 2), (float)(Power / (12)), SpriteEffects.None, 0f); }
+                { sb.Draw(Sprite, Position, null, Color.White, (float)(Math.PI + Math.Atan(-Direction.X / Direction.Y)), new Vector2(Sprite.Width / 2, Sprite.Height / 2), (float)(Radius / (50)), SpriteEffects.None, 0f); }
             }
             sb.End();
         }
